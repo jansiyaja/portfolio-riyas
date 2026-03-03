@@ -10,105 +10,90 @@ const iconMap = {
 
 export default function OutreachSection() {
     return (
-        <section id="outreach" className="section" style={{ background: 'var(--color-bg-secondary)' }}>
-            <div className="container">
+        <section id="outreach" className="bg-[#070B14] py-24 relative overflow-hidden">
+            <div className="container-custom">
                 {/* Header */}
-                <div style={{ marginBottom: '3.5rem' }}>
-                    <p className="section-eyebrow">Public Impact</p>
-                    <h2 className="section-title">
+                <div className="mb-16">
+                    <p className="font-mono text-[0.72rem] font-medium text-primary-light tracking-widest uppercase mb-3 flex items-center gap-3">
+                        <span className="w-10 h-px bg-primary-light/50" /> Public Impact
+                    </p>
+                    <h2 className="text-[clamp(2rem,4vw,3rem)] font-extrabold mb-3 text-white">
                         Outreach & <span className="gradient-text">Social Engagement</span>
                     </h2>
-                    <p className="section-subtitle">
+                    <p className="text-white/50 text-sm max-w-[560px] leading-relaxed">
                         Translating academic research into actionable awareness and policy advocacy.
                     </p>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                {/* Programs — Alternating image layout */}
+                <div className="flex flex-col gap-20">
                     {OUTREACH_PROGRAMS.map((prog, idx) => {
                         const Icon = iconMap[prog.icon] || Users;
+                        const isEven = idx % 2 === 0;
+
                         return (
                             <div
                                 key={prog.id}
-                                className="glass-card"
-                                style={{
-                                    padding: '2.5rem',
-                                    display: 'grid',
-                                    gridTemplateColumns: 'auto 1fr',
-                                    gap: '2.5rem',
-                                    alignItems: 'start',
-                                    background: idx % 2 === 0 ? 'rgba(99,120,255,0.03)' : 'rgba(34,211,238,0.03)',
-                                    animation: 'fadeInLeft 0.7s ease backwards',
-                                    animationDelay: `${idx * 0.15}s`
-                                }}
+                                className={`grid grid-cols-1 lg:grid-cols-2 gap-0 rounded-2xl overflow-hidden border border-white/8 ${isEven ? '' : ''}`}
                             >
-                                {/* Left side: Icon & Meta */}
-                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', minWidth: '120px' }}>
-                                    <div style={{
-                                        width: 64, height: 64,
-                                        borderRadius: 16,
-                                        background: 'var(--color-bg)',
-                                        border: '1px solid var(--color-border)',
-                                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                        color: 'var(--color-primary-light)',
-                                        boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
-                                    }}>
-                                        <Icon size={32} />
-                                    </div>
-                                    <div style={{ textAlign: 'center' }}>
-                                        <div style={{ fontSize: '0.7rem', fontWeight: 600, color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                                            {prog.period}
+                                {/* Image — Alternates left/right */}
+                                <div className={`relative h-72 lg:h-auto min-h-[400px] ${!isEven ? 'lg:order-2' : ''}`}>
+                                    {prog.image ? (
+                                        <img
+                                            src={prog.image}
+                                            alt={prog.title}
+                                            className="w-full h-full object-cover"
+                                        />
+                                    ) : (
+                                        <div className="w-full h-full bg-gradient-to-br from-primary/15 to-secondary/10 flex items-center justify-center">
+                                            <Icon size={80} className="text-white/5" />
                                         </div>
-                                        <div style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--color-primary-light)' }}>
+                                    )}
+
+                                    {/* Category badge on image */}
+                                    <div className="absolute top-5 left-5">
+                                        <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-white text-xs font-semibold">
+                                            <Icon size={12} className="text-primary-light" />
                                             {prog.category}
-                                        </div>
+                                        </span>
+                                    </div>
+
+                                    {/* Period badge */}
+                                    <div className="absolute bottom-5 left-5">
+                                        <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-white/60 text-xs font-mono">
+                                            {prog.period}
+                                        </span>
                                     </div>
                                 </div>
 
-                                {/* Right side: Details */}
-                                <div>
-                                    <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '0.75rem', color: 'var(--color-text-primary)' }}>
+                                {/* Text Panel */}
+                                <div className={`bg-[#0d1020] p-8 lg:p-12 flex flex-col justify-center ${!isEven ? 'lg:order-1' : ''}`}>
+                                    {/* Participants pill */}
+                                    <div className="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary-light text-xs font-bold w-fit">
+                                        <Users size={12} />
+                                        {prog.participants}
+                                    </div>
+
+                                    <h3 className="text-2xl lg:text-3xl font-black text-white leading-tight mb-5">
                                         {prog.title}
                                     </h3>
-                                    <p style={{
-                                        fontSize: '0.95rem',
-                                        color: 'var(--color-text-secondary)',
-                                        lineHeight: 1.7,
-                                        marginBottom: '1.5rem',
-                                        maxWidth: '700px'
-                                    }}>
+                                    <p className="text-white/55 text-sm leading-[1.9] mb-8">
                                         {prog.description}
                                     </p>
 
-                                    <div style={{
-                                        display: 'grid',
-                                        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-                                        gap: '1.5rem',
-                                        padding: '1.5rem',
-                                        background: 'rgba(0,0,0,0.2)',
-                                        borderRadius: 'var(--radius-lg)',
-                                        border: '1px solid var(--color-border)'
-                                    }}>
-                                        <div>
-                                            <div style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '0.75rem', fontWeight: 600 }}>
-                                                Key Highlights
-                                            </div>
-                                            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-                                                {prog.highlights.map((highlight, i) => (
-                                                    <li key={i} style={{ display: 'flex', alignItems: 'start', gap: '0.6rem', fontSize: '0.88rem', color: 'var(--color-text-secondary)' }}>
-                                                        <CheckCircle2 size={14} style={{ color: 'var(--color-emerald)', marginTop: '3px', flexShrink: 0 }} />
-                                                        <span>{highlight}</span>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                        <div style={{ borderLeft: '1px solid var(--color-border)', paddingLeft: '1.5rem' }}>
-                                            <div style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', marginBottom: '0.5rem', fontWeight: 600 }}>
-                                                Impact
-                                            </div>
-                                            <div style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--color-text-primary)' }}>
-                                                {prog.participants}
-                                            </div>
-                                        </div>
+                                    {/* Highlights */}
+                                    <div>
+                                        <p className="text-[0.65rem] font-mono uppercase tracking-widest text-white/30 mb-4">
+                                            Key Highlights
+                                        </p>
+                                        <ul className="space-y-3">
+                                            {prog.highlights.map((h, i) => (
+                                                <li key={i} className="flex items-start gap-3 text-sm text-white/60 leading-relaxed">
+                                                    <CheckCircle2 size={15} className="text-emerald-400 shrink-0 mt-0.5" />
+                                                    {h}
+                                                </li>
+                                            ))}
+                                        </ul>
                                     </div>
                                 </div>
                             </div>

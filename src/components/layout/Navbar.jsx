@@ -45,48 +45,30 @@ export default function Navbar() {
     return (
         <>
             <nav
-                style={{
-                    position: 'fixed',
-                    top: 0, left: 0, right: 0,
-                    zIndex: 100,
-                    padding: scrolled ? '0.75rem 0' : '1.25rem 0',
-                    background: scrolled
-                        ? 'rgba(7, 11, 20, 0.92)'
-                        : 'transparent',
-                    backdropFilter: scrolled ? 'blur(20px)' : 'none',
-                    borderBottom: scrolled ? '1px solid rgba(99,120,255,0.12)' : 'none',
-                    transition: 'all 0.35s ease',
-                }}
+                className={`
+                    fixed top-0 left-0 right-0 z-[100] transition-all duration-350
+                    ${scrolled
+                        ? 'py-3 bg-[#070B14]/92 backdrop-blur-xl border-b border-primary/12'
+                        : 'py-5 bg-transparent border-none'}
+                `}
             >
-                <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div className="container-custom flex items-center justify-between">
                     {/* Logo */}
                     <a
                         href="#hero"
                         onClick={(e) => { e.preventDefault(); handleNavClick('#hero'); }}
-                        style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', textDecoration: 'none' }}
+                        className="flex items-center gap-2.5 group"
                     >
-                        <span
-                            style={{
-                                width: 36, height: 36,
-                                borderRadius: 10,
-                                background: 'linear-gradient(135deg, #6378FF, #8B5CF6)',
-                                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                fontFamily: 'var(--font-display)',
-                                fontWeight: 800, fontSize: '1.1rem',
-                                color: 'white',
-                                boxShadow: '0 4px 16px rgba(99,120,255,0.4)',
-                            }}
-                        >
+                        <span className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center font-display font-black text-lg text-white shadow-lg transition-transform group-hover:scale-110">
                             {PROFILE.name[0]}
                         </span>
-                        <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.05rem', color: 'var(--color-text-primary)' }}>
+                        <span className="font-display font-bold text-[1.05rem] text-text-primary">
                             {PROFILE.name.split(' ')[0]}<span className="gradient-text"> {PROFILE.name.split(' ').slice(1).join(' ')}</span>
                         </span>
                     </a>
 
                     {/* Desktop nav */}
-                    <ul style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', listStyle: 'none', margin: 0, padding: 0 }}
-                        className="desktop-nav">
+                    <ul className="hidden lg:flex items-center gap-1 list-none m-0 p-0">
                         {navLinks.map((link) => {
                             const sectionId = link.href.replace('#', '');
                             const isActive = activeSection === sectionId;
@@ -95,29 +77,12 @@ export default function Navbar() {
                                     <a
                                         href={link.href}
                                         onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-                                        style={{
-                                            display: 'inline-flex', alignItems: 'center',
-                                            padding: '0.45rem 0.9rem',
-                                            borderRadius: 'var(--radius-full)',
-                                            fontSize: '0.88rem',
-                                            fontWeight: 500,
-                                            color: isActive ? 'var(--color-primary-light)' : 'var(--color-text-secondary)',
-                                            background: isActive ? 'rgba(99,120,255,0.12)' : 'transparent',
-                                            transition: 'all 0.2s ease',
-                                            textDecoration: 'none',
-                                        }}
-                                        onMouseEnter={(e) => {
-                                            if (!isActive) {
-                                                e.currentTarget.style.color = 'var(--color-text-primary)';
-                                                e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
-                                            }
-                                        }}
-                                        onMouseLeave={(e) => {
-                                            if (!isActive) {
-                                                e.currentTarget.style.color = 'var(--color-text-secondary)';
-                                                e.currentTarget.style.background = 'transparent';
-                                            }
-                                        }}
+                                        className={`
+                                            inline-flex items-center px-4 py-2 rounded-full text-[0.88rem] font-semibold transition-all duration-200
+                                            ${isActive
+                                                ? 'text-primary-light bg-primary/12 shadow-[0_4px_12px_rgba(99,120,255,0.1)]'
+                                                : 'text-text-secondary hover:text-text-primary hover:bg-white/5'}
+                                        `}
                                     >
                                         {link.label}
                                     </a>
@@ -127,45 +92,31 @@ export default function Navbar() {
                     </ul>
 
                     {/* Social icons + CTA */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }} className="desktop-nav">
+                    <div className="hidden lg:flex items-center gap-4">
                         {PROFILE.socials.linkedin && (
                             <a
                                 href={PROFILE.socials.linkedin}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label="LinkedIn"
-                                style={{
-                                    width: 36, height: 36,
-                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                    borderRadius: 'var(--radius-sm)',
-                                    color: 'var(--color-text-muted)',
-                                    transition: 'all 0.2s ease',
-                                }}
-                                onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--color-primary-light)'; e.currentTarget.style.background = 'rgba(99,120,255,0.1)'; }}
-                                onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--color-text-muted)'; e.currentTarget.style.background = 'transparent'; }}
+                                className="w-10 h-10 flex items-center justify-center rounded-xl text-text-muted hover:text-primary-light hover:bg-primary/10 transition-all"
                             >
-                                <Linkedin size={17} />
+                                <Linkedin size={18} />
                             </a>
                         )}
-                        <a href={`mailto:${PROFILE.email}`} className="btn btn-primary" style={{ padding: '0.5rem 1.2rem', fontSize: '0.85rem' }}>
-                            <Mail size={14} style={{ marginRight: '0.4rem' }} /> Contact
+                        <a
+                            href={`mailto:${PROFILE.email}`}
+                            className="btn btn-primary !px-5 !py-2.5 !text-[0.85rem] font-bold"
+                        >
+                            <Mail size={14} className="mr-1.5" /> Contact
                         </a>
                     </div>
 
                     {/* Mobile hamburger */}
                     <button
-                        className="mobile-menu-btn"
+                        className="lg:hidden p-2 rounded-xl bg-primary/10 border border-primary/20 text-text-primary cursor-pointer hover:bg-primary/20 transition-all"
                         onClick={() => setMobileOpen(!mobileOpen)}
                         aria-label="Toggle menu"
-                        style={{
-                            background: 'rgba(99,120,255,0.1)',
-                            border: '1px solid rgba(99,120,255,0.2)',
-                            borderRadius: 'var(--radius-sm)',
-                            padding: '0.5rem',
-                            cursor: 'pointer',
-                            color: 'var(--color-text-primary)',
-                            display: 'none',
-                        }}
                     >
                         {mobileOpen ? <X size={20} /> : <Menu size={20} />}
                     </button>
@@ -173,52 +124,30 @@ export default function Navbar() {
             </nav>
 
             {/* Mobile drawer */}
-            <div style={{
-                position: 'fixed',
-                top: 0, left: 0, right: 0, bottom: 0,
-                background: 'rgba(7,11,20,0.97)',
-                backdropFilter: 'blur(20px)',
-                zIndex: 99,
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                gap: '0.5rem',
-                opacity: mobileOpen ? 1 : 0,
-                pointerEvents: mobileOpen ? 'all' : 'none',
-                transition: 'opacity 0.3s ease',
-            }}>
+            <div
+                className={`
+                    fixed inset-0 z-[99] bg-[#070B14]/97 backdrop-blur-2xl transition-all duration-300 flex flex-col items-center justify-center gap-2
+                    ${mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}
+                `}
+            >
                 {navLinks.map((link) => (
                     <a
                         key={link.href}
                         href={link.href}
                         onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-                        style={{
-                            fontSize: '1.6rem',
-                            fontFamily: 'var(--font-display)',
-                            fontWeight: 700,
-                            color: 'var(--color-text-secondary)',
-                            padding: '0.75rem 2rem',
-                            transition: 'color 0.2s ease',
-                            textDecoration: 'none',
-                        }}
-                        onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-primary-light)'}
-                        onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-secondary)'}
+                        className="text-2xl font-display font-black text-text-secondary px-8 py-3 hover:text-primary-light transition-colors tracking-tight"
                     >
                         {link.label}
                     </a>
                 ))}
-                <a href={`mailto:${PROFILE.email}`} className="btn btn-primary" style={{ marginTop: '1rem' }}>
+                <a
+                    href={`mailto:${PROFILE.email}`}
+                    className="btn btn-primary mt-6 text-lg px-10 py-4 font-black"
+                    onClick={() => setMobileOpen(false)}
+                >
                     Contact Me
                 </a>
             </div>
-
-            <style>{`
-        @media (max-width: 900px) {
-          .desktop-nav { display: none !important; }
-          .mobile-menu-btn { display: flex !important; }
-        }
-      `}</style>
         </>
     );
 }

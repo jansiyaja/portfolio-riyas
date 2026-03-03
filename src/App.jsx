@@ -1,4 +1,3 @@
-import './index.css'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import HeroSection from './components/sections/HeroSection'
@@ -14,11 +13,13 @@ import GallerySection from './components/sections/GallerySection'
 
 function App() {
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--color-bg)' }}>
+    <div className="min-h-screen bg-bg relative">
       {/* Noise texture overlay for premium feel */}
       <div className="noise-overlay" />
+
       <Navbar />
-      <main>
+
+      <main className="relative z-10">
         <HeroSection />
         <AboutSection />
         <ResearchSection />
@@ -30,6 +31,7 @@ function App() {
         <MediaSection />
         <ContactSection />
       </main>
+
       <Footer />
     </div>
   )

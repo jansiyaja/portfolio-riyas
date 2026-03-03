@@ -1,186 +1,143 @@
 import { useState } from 'react';
 import { BLOG_POSTS } from '../../data/portfolio';
-import { Calendar, Clock, ArrowRight } from 'lucide-react';
+import { Calendar, Clock, ArrowRight, Tag } from 'lucide-react';
 
-const tagColors = {
-    'Policy': { bg: 'rgba(99,120,255,0.1)', border: 'rgba(99,120,255,0.25)', color: 'var(--color-primary-light)' },
-    'Research': { bg: 'rgba(34,211,238,0.08)', border: 'rgba(34,211,238,0.2)', color: 'var(--color-secondary)' },
-    'Reflection': { bg: 'rgba(52,211,153,0.08)', border: 'rgba(52,211,153,0.2)', color: 'var(--color-emerald)' },
-    'Opinion': { bg: 'rgba(167,139,250,0.1)', border: 'rgba(167,139,250,0.25)', color: 'var(--color-accent)' },
-    'Outreach': { bg: 'rgba(251,191,36,0.08)', border: 'rgba(251,191,36,0.2)', color: 'var(--color-amber)' },
-};
-
-function getTagStyle(tag) {
-    return tagColors[tag] || { bg: 'rgba(99,120,255,0.07)', border: 'rgba(99,120,255,0.15)', color: 'var(--color-text-muted)' };
-}
+const GRADIENT_COLORS = [
+    'from-[#6378FF] to-[#8B5CF6]',
+    'from-[#22D3EE] to-[#6378FF]',
+    'from-[#34D399] to-[#22D3EE]',
+    'from-[#FBBF24] to-[#F87171]',
+    'from-[#A78BFA] to-[#6378FF]',
+    'from-[#F87171] to-[#FBBF24]',
+];
 
 function formatDate(dateStr) {
     return new Date(dateStr).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 }
 
-// Gradient initials card placeholder
-function BlogCardImage({ post, size = 'large' }) {
-    const colors = [
-        ['#6378FF', '#8B5CF6'],
-        ['#22D3EE', '#6378FF'],
-        ['#34D399', '#22D3EE'],
-        ['#FBBF24', '#F87171'],
-        ['#A78BFA', '#6378FF'],
-        ['#F87171', '#FBBF24'],
-    ];
-    // Map post ID or index to colors
-    const idIdx = typeof post.id === 'string' ? post.id.charCodeAt(post.id.length - 1) : post.id;
-    const [c1, c2] = colors[idIdx % colors.length];
-    const initials = post.title.split(' ').slice(0, 2).map(w => w[0]).join('');
-    const h = size === 'large' ? 240 : 160;
-    return (
-        <div style={{
-            height: h,
-            borderRadius: 'var(--radius-md) var(--radius-md) 0 0',
-            background: `linear-gradient(135deg, ${c1} 0%, ${c2} 100%)`,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            position: 'relative', overflow: 'hidden',
-        }}>
-            <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.2)', backdropFilter: 'blur(2px)' }} />
-            <span style={{
-                fontFamily: 'var(--font-display)', fontSize: size === 'large' ? '4rem' : '2.5rem',
-                fontWeight: 900, color: 'rgba(255,255,255,0.95)',
-                position: 'relative', zIndex: 1, letterSpacing: '0.05em',
-                textShadow: '0 4px 12px rgba(0,0,0,0.2)'
-            }}>{initials}</span>
-        </div>
-    );
+function getGradient(id) {
+    const idx = typeof id === 'string' ? id.charCodeAt(id.length - 1) % GRADIENT_COLORS.length : 0;
+    return GRADIENT_COLORS[idx];
 }
 
 export default function BlogSection() {
     const [filter, setFilter] = useState('All');
-    const allTags = ['All', ...new Set(BLOG_POSTS.flatMap((p) => p.tags))];
-    const featured = BLOG_POSTS.filter((p) => p.featured);
-    const filtered = filter === 'All' ? BLOG_POSTS.filter((p) => !p.featured) : BLOG_POSTS.filter((p) => p.tags.includes(filter) && !p.featured);
+    const allTags = ['All', ...new Set(BLOG_POSTS.flatMap((p) => p.tags))].slice(0, 8);
+    const featured = BLOG_POSTS.find((p) => p.featured);
+    const others = filter === 'All'
+        ? BLOG_POSTS.filter((p) => !p.featured)
+        : BLOG_POSTS.filter((p) => p.tags.includes(filter) && !p.featured);
 
     return (
-        <section id="blog" className="section" style={{ background: 'var(--color-bg)', position: 'relative', overflow: 'hidden' }}>
-            <div className="grid-bg" />
-            <div className="glow-orb" style={{ width: 450, height: 450, background: 'radial-gradient(circle, rgba(167,139,250,0.08) 0%, transparent 70%)', top: '10%', right: '-5%' }} />
-
-            <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-                <div style={{ marginBottom: '3rem' }}>
-                    <p className="section-eyebrow">Writing</p>
-                    <h2 className="section-title">From the <span className="gradient-text">Blog</span></h2>
-                    <p className="section-subtitle">Reflections on Science & Technology Studies, disability policy, and public engagement.</p>
+        <section id="blog" className="bg-[#070B14] py-24 relative overflow-hidden">
+            <div className="container-custom">
+                {/* Header */}
+                <div className="mb-14">
+                    <p className="font-mono text-[0.72rem] font-medium text-primary-light tracking-widest uppercase mb-3 flex items-center gap-3">
+                        <span className="w-10 h-px bg-primary-light/50" /> Writing
+                    </p>
+                    <h2 className="text-[clamp(2rem,4vw,3rem)] font-extrabold mb-3 text-white">From the <span className="gradient-text">Blog</span></h2>
+                    <p className="text-white/50 max-w-[560px] text-sm leading-relaxed">Reflections on STS, disability policy, and public engagement.</p>
                 </div>
 
-                {/* Featured posts */}
-                {featured.length > 0 && (
-                    <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-                        gap: '1.25rem',
-                        marginBottom: '2.5rem',
-                    }}>
-                        {featured.map((post) => (
-                            <div key={post.id} className="glass-card" style={{ padding: 0, overflow: 'hidden', cursor: 'pointer' }}>
-                                <BlogCardImage post={post} size="large" />
-                                <div style={{ padding: '1.5rem' }}>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
-                                        <span style={{
-                                            padding: '0.2rem 0.65rem', borderRadius: '9999px',
-                                            fontSize: '0.68rem', fontWeight: 700,
-                                            background: 'linear-gradient(135deg, rgba(99,120,255,0.2), rgba(139,92,246,0.15))',
-                                            border: '1px solid rgba(99,120,255,0.3)',
-                                            color: 'var(--color-primary-light)',
-                                            fontFamily: 'var(--font-mono)',
-                                        }}>⭐ Featured</span>
-                                        {post.tags.slice(0, 2).map((t) => {
-                                            const s = getTagStyle(t);
-                                            return (
-                                                <span key={t} style={{ padding: '0.2rem 0.6rem', borderRadius: '9999px', fontSize: '0.68rem', fontWeight: 600, background: s.bg, border: `1px solid ${s.border}`, color: s.color }}>
-                                                    {t}
-                                                </span>
-                                            );
-                                        })}
+                {/* ── Featured Post: Large Image Card ── */}
+                {featured && (
+                    <div className="mb-12 group cursor-pointer">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 rounded-2xl overflow-hidden border border-white/8">
+                            {/* Image — Full height */}
+                            <div className="relative h-72 lg:h-auto min-h-[400px]">
+                                {featured.image ? (
+                                    <img
+                                        src={featured.image}
+                                        alt={featured.title}
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                    />
+                                ) : (
+                                    <div className={`w-full h-full bg-gradient-to-br ${getGradient(featured.id)}`} />
+                                )}
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/60 hidden lg:block" />
+                                <div className="absolute top-5 left-5">
+                                    <span className="px-3 py-1 rounded-full text-[0.7rem] font-bold bg-white text-black font-mono">⭐ Featured</span>
+                                </div>
+                            </div>
+
+                            {/* Text */}
+                            <div className="bg-[#0d1020] p-8 lg:p-12 flex flex-col justify-center">
+                                <div className="flex flex-wrap gap-2 mb-5">
+                                    {featured.tags.slice(0, 3).map(t => (
+                                        <span key={t} className="px-2.5 py-1 rounded-md text-[0.7rem] font-semibold bg-primary/10 border border-primary/20 text-primary-light">{t}</span>
+                                    ))}
+                                </div>
+                                <h3 className="text-2xl lg:text-3xl font-black text-white leading-tight mb-4 group-hover:text-primary-light transition-colors">
+                                    {featured.title}
+                                </h3>
+                                <p className="text-white/55 leading-relaxed mb-8 text-sm line-clamp-4">
+                                    {featured.excerpt || featured.content?.split('\n')[0]}
+                                </p>
+                                <div className="flex items-center justify-between">
+                                    <div className="flex gap-4 text-xs text-white/40">
+                                        <span className="flex items-center gap-1.5"><Calendar size={12} />{formatDate(featured.date)}</span>
+                                        <span className="flex items-center gap-1.5"><Clock size={12} />{featured.readTime}</span>
                                     </div>
-                                    <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.6rem', lineHeight: 1.4 }}>
-                                        {post.title}
-                                    </h3>
-                                    <p style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)', lineHeight: 1.7, marginBottom: '1.25rem' }}>
-                                        {post.content}
-                                    </p>
-                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                        <div style={{ display: 'flex', gap: '1rem', fontSize: '0.78rem', color: 'var(--color-text-muted)' }}>
-                                            <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}><Calendar size={12} /> {formatDate(post.date)}</span>
-                                            <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}><Clock size={12} /> {post.readTime}</span>
-                                        </div>
-                                        <a href={`#blog-${post.slug}`} style={{
-                                            display: 'flex', alignItems: 'center', gap: '0.3rem',
-                                            fontSize: '0.82rem', fontWeight: 600,
-                                            color: 'var(--color-primary-light)',
-                                            transition: 'gap 0.2s ease',
-                                        }}>
-                                            Read <ArrowRight size={14} />
-                                        </a>
+                                    <div className="flex items-center gap-2 text-sm font-semibold text-primary-light group-hover:gap-3 transition-all">
+                                        Read <ArrowRight size={14} />
                                     </div>
                                 </div>
                             </div>
-                        ))}
+                        </div>
                     </div>
                 )}
 
-                {/* Filter tabs */}
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1.75rem' }}>
-                    {allTags.map((tag) => (
+                {/* ── Filter ── */}
+                <div className="flex flex-wrap gap-2 mb-8">
+                    {allTags.map(tag => (
                         <button
                             key={tag}
                             onClick={() => setFilter(tag)}
-                            style={{
-                                padding: '0.4rem 1rem',
-                                borderRadius: '9999px',
-                                fontSize: '0.82rem', fontWeight: 500,
-                                border: '1px solid',
-                                cursor: 'pointer',
-                                transition: 'all 0.2s ease',
-                                background: filter === tag ? 'linear-gradient(135deg, #6378FF, #8B5CF6)' : 'transparent',
-                                borderColor: filter === tag ? 'transparent' : 'var(--color-border)',
-                                color: filter === tag ? 'white' : 'var(--color-text-secondary)',
-                                boxShadow: filter === tag ? '0 4px 12px rgba(99,120,255,0.3)' : 'none',
-                            }}
+                            className={`px-4 py-1.5 rounded-full text-[0.78rem] font-medium border transition-all cursor-pointer
+                                ${filter === tag
+                                    ? 'bg-white text-black border-transparent'
+                                    : 'bg-transparent border-white/10 text-white/50 hover:border-white/25 hover:text-white/80'}`}
                         >
                             {tag}
                         </button>
                     ))}
                 </div>
 
-                {/* Other posts grid */}
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-                    gap: '1rem',
-                }}>
-                    {filtered.map((post) => (
-                        <div key={post.id} className="glass-card" style={{ padding: 0, overflow: 'hidden', cursor: 'pointer' }}>
-                            <BlogCardImage post={post} size="small" />
-                            <div style={{ padding: '1.25rem' }}>
-                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginBottom: '0.75rem' }}>
-                                    {post.tags.slice(0, 2).map((t) => {
-                                        const s = getTagStyle(t);
-                                        return (
-                                            <span key={t} style={{ padding: '0.15rem 0.55rem', borderRadius: '9999px', fontSize: '0.68rem', fontWeight: 600, background: s.bg, border: `1px solid ${s.border}`, color: s.color }}>
-                                                {t}
-                                            </span>
-                                        );
-                                    })}
+                {/* ── Other Posts Grid ── */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    {others.map((post) => (
+                        <div key={post.id} className="group cursor-pointer rounded-xl overflow-hidden border border-white/8 hover:border-white/20 transition-all duration-300 bg-[#0a0d1a]">
+                            {/* Image */}
+                            <div className="relative h-52 overflow-hidden">
+                                {post.image ? (
+                                    <img
+                                        src={post.image}
+                                        alt={post.title}
+                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                    />
+                                ) : (
+                                    <div className={`w-full h-full bg-gradient-to-br ${getGradient(post.id)}`} />
+                                )}
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0d1a] via-transparent to-transparent" />
+                            </div>
+
+                            {/* Text */}
+                            <div className="p-5">
+                                <div className="flex flex-wrap gap-1.5 mb-3">
+                                    {post.tags.slice(0, 2).map(t => (
+                                        <span key={t} className="px-2 py-0.5 rounded text-[0.65rem] font-semibold bg-white/5 text-white/50">{t}</span>
+                                    ))}
                                 </div>
-                                <h4 style={{ fontFamily: 'var(--font-display)', fontSize: '1rem', fontWeight: 700, lineHeight: 1.4, marginBottom: '0.5rem' }}>
+                                <h4 className="font-bold text-white text-[0.95rem] leading-snug mb-2 group-hover:text-primary-light transition-colors">
                                     {post.title}
                                 </h4>
-                                <p style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', lineHeight: 1.65, marginBottom: '1rem' }}>
-                                    {post.content.slice(0, 100)}…
+                                <p className="text-white/45 text-[0.82rem] leading-relaxed line-clamp-2 mb-4">
+                                    {post.excerpt || post.content?.split('\n')[0]}
                                 </p>
-                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                    <div style={{ display: 'flex', gap: '0.75rem', fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
-                                        <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}><Clock size={11} /> {post.readTime}</span>
-                                    </div>
-                                    <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>{formatDate(post.date)}</span>
+                                <div className="flex items-center justify-between pt-3 border-t border-white/6 text-[0.72rem] text-white/35">
+                                    <span className="flex items-center gap-1.5"><Clock size={11} />{post.readTime}</span>
+                                    <span>{formatDate(post.date)}</span>
                                 </div>
                             </div>
                         </div>

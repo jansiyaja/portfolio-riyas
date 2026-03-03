@@ -1,5 +1,5 @@
 import { PROFILE } from '../../data/portfolio';
-import { ArrowDown, Linkedin, Mail, ExternalLink, BookOpen } from 'lucide-react';
+import { ArrowDown, Mail, BookOpen, MapPin } from 'lucide-react';
 
 export default function HeroSection() {
     const scrollToAbout = () => {
@@ -9,187 +9,109 @@ export default function HeroSection() {
     return (
         <section
             id="hero"
-            style={{
-                minHeight: '100vh',
-                display: 'flex',
-                alignItems: 'center',
-                position: 'relative',
-                overflow: 'hidden',
-                background: 'var(--gradient-hero)',
-                paddingTop: '5rem',
-            }}
+            className="min-h-screen flex flex-col lg:flex-row relative overflow-hidden bg-[#070B14]"
         >
-            {/* Grid bg */}
-            <div className="grid-bg" />
+            {/* ── LEFT: Full-height photo ── */}
+            <div className="relative w-full lg:w-[48%] h-[60vh] lg:h-screen flex-shrink-0">
+                {PROFILE.image ? (
+                    <img
+                        src={PROFILE.image}
+                        alt={PROFILE.name}
+                        className="w-full h-full object-cover object-top"
+                    />
+                ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20" />
+                )}
 
-            {/* Glow blobs */}
-            <div className="glow-orb animate-pulse-glow" style={{
-                width: 500, height: 500,
-                background: 'radial-gradient(circle, rgba(99,120,255,0.15) 0%, transparent 70%)',
-                top: '-10%', left: '-15%',
-            }} />
-            <div className="glow-orb" style={{
-                width: 350, height: 350,
-                background: 'radial-gradient(circle, rgba(34,211,238,0.1) 0%, transparent 70%)',
-                bottom: '5%', right: '5%',
-                animation: 'pulse-glow 4s ease-in-out infinite 1.5s',
-            }} />
+                {/* Gradient overlay for text readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#070B14] via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-[#070B14]" />
 
-            <div className="container" style={{ position: 'relative', zIndex: 1, padding: '4rem 1.5rem 5rem' }}>
-
-                {/* Institute badge */}
-                <div style={{ marginBottom: '2rem', animation: 'fadeInUp 0.5s ease forwards' }}>
-                    <span style={{
-                        display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-                        padding: '0.4rem 1.1rem',
-                        borderRadius: '9999px',
-                        border: '1px solid rgba(99,120,255,0.3)',
-                        background: 'rgba(99,120,255,0.08)',
-                        fontSize: '0.8rem', fontWeight: 500,
-                        color: 'var(--color-primary-light)',
-                        fontFamily: 'var(--font-mono)',
-                    }}>
-                        <span style={{
-                            width: 7, height: 7, borderRadius: '50%',
-                            background: 'var(--color-emerald)',
-                            boxShadow: '0 0 8px var(--color-emerald)',
-                            animation: 'pulse-glow 2s infinite',
-                            display: 'inline-block',
-                        }} />
-                        {PROFILE.institutionShort} — {PROFILE.department}
+                {/* Institute badge pinned on image */}
+                <div className="absolute top-6 left-6 z-10">
+                    <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/20 bg-black/50 backdrop-blur-md text-[0.78rem] font-medium text-white font-mono">
+                        <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34D399] animate-pulse inline-block" />
+                        {PROFILE.institutionShort} · {PROFILE.department}
                     </span>
                 </div>
+            </div>
 
-                {/* Name */}
-                <h1 style={{
-                    fontFamily: 'var(--font-display)',
-                    fontSize: 'clamp(2.8rem, 7vw, 5.5rem)',
-                    fontWeight: 900,
-                    lineHeight: 1.05,
-                    marginBottom: '1rem',
-                    animation: 'fadeInUp 0.6s ease 0.1s both',
-                    color: 'var(--color-text-primary)',
-                }}>
-                    {PROFILE.name.split(' ')[0]}{' '}
-                    <span className="gradient-text">{PROFILE.name.split(' ').slice(1).join(' ')}</span>
-                </h1>
+            {/* ── RIGHT: Text content ── */}
+            <div className="flex-1 flex items-center relative z-10 lg:-ml-20 pt-0 lg:pt-0">
+                <div className="w-full px-8 lg:px-16 py-12 lg:py-0">
 
-                {/* Title */}
-                <p style={{
-                    fontSize: 'clamp(1rem, 2.5vw, 1.35rem)',
-                    color: 'var(--color-text-secondary)',
-                    marginBottom: '0.5rem',
-                    fontWeight: 400,
-                    animation: 'fadeInUp 0.6s ease 0.2s both',
-                }}>
-                    {PROFILE.title} · {PROFILE.institution}
-                </p>
+                    {/* Name */}
+                    <h1 className="font-display text-[clamp(3rem,6vw,5.5rem)] font-black leading-[1.0] mb-5 text-white animate-fade-up">
+                        {PROFILE.name.split(' ')[0]}<br />
+                        <span className="gradient-text">{PROFILE.name.split(' ').slice(1).join(' ')}</span>
+                    </h1>
 
-                {/* Short bio — first sentence */}
-                <p style={{
-                    fontSize: '1rem',
-                    color: 'var(--color-text-secondary)',
-                    maxWidth: 620,
-                    lineHeight: 1.8,
-                    marginBottom: '2rem',
-                    animation: 'fadeInUp 0.6s ease 0.3s both',
-                }}>
-                    {PROFILE.bio.split('\n')[0].trim()}
-                </p>
+                    {/* Title pill */}
+                    <p className="text-[clamp(0.95rem,2vw,1.2rem)] text-white/70 mb-6 font-medium animate-fade-up [animation-delay:0.1s] [animation-fill-mode:both]">
+                        {PROFILE.title}
+                    </p>
 
-                {/* Research interests pills */}
-                <div style={{
-                    display: 'flex', flexWrap: 'wrap', gap: '0.5rem',
-                    marginBottom: '2.5rem',
-                    animation: 'fadeInUp 0.6s ease 0.35s both',
-                }}>
-                    {PROFILE.interests.map(interest => (
-                        <span key={interest} style={{
-                            padding: '0.25rem 0.85rem',
-                            borderRadius: '9999px',
-                            fontSize: '0.78rem',
-                            fontWeight: 500,
-                            background: 'rgba(99,120,255,0.1)',
-                            border: '1px solid rgba(99,120,255,0.25)',
-                            color: 'var(--color-primary-light)',
-                        }}>
-                            {interest}
-                        </span>
-                    ))}
-                </div>
+                    {/* Location */}
+                    <div className="flex items-center gap-2 mb-8 text-white/50 text-sm animate-fade-up [animation-delay:0.15s] [animation-fill-mode:both]">
+                        <MapPin size={14} className="text-primary-light" />
+                        <span>{PROFILE.institution}</span>
+                    </div>
 
-                {/* CTAs */}
-                <div style={{
-                    display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap',
-                    marginBottom: '3rem',
-                    animation: 'fadeInUp 0.6s ease 0.4s both',
-                }}>
-                    <a
-                        href={`mailto:${PROFILE.email}`}
-                        className="btn btn-primary"
-                    >
-                        <Mail size={16} /> Get in Touch
-                    </a>
-                    <a
-                        href={PROFILE.socials.scholar}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn btn-outline"
-                    >
-                        <BookOpen size={16} /> Google Scholar
-                    </a>
-                    {PROFILE.socials.linkedin && (
+                    {/* Short bio */}
+                    <p className="text-[1rem] text-white/60 max-w-[520px] leading-relaxed mb-10 animate-fade-up [animation-delay:0.2s] [animation-fill-mode:both]">
+                        {PROFILE.bio.split('.')[0].trim()}.
+                    </p>
+
+                    {/* Research tags */}
+                    <div className="flex flex-wrap gap-2 mb-10 animate-fade-up [animation-delay:0.25s] [animation-fill-mode:both]">
+                        {PROFILE.interests.slice(0, 5).map(interest => (
+                            <span key={interest} className="px-3 py-1 rounded-md text-[0.75rem] font-medium bg-white/5 border border-white/12 text-white/70">
+                                {interest}
+                            </span>
+                        ))}
+                    </div>
+
+                    {/* CTAs */}
+                    <div className="flex items-center gap-4 flex-wrap animate-fade-up [animation-delay:0.3s] [animation-fill-mode:both]">
                         <a
-                            href={PROFILE.socials.linkedin}
+                            href={`mailto:${PROFILE.email}`}
+                            className="btn btn-primary"
+                        >
+                            <Mail size={16} /> Get in Touch
+                        </a>
+                        <a
+                            href={PROFILE.socials.scholar}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="btn btn-ghost"
+                            className="btn btn-outline"
                         >
-                            <Linkedin size={16} />
+                            <BookOpen size={16} /> Scholar Profile
                         </a>
-                    )}
-                </div>
+                    </div>
 
-                {/* Divider info row */}
-                <div style={{
-                    display: 'flex', flexWrap: 'wrap', gap: '2rem',
-                    animation: 'fadeInUp 0.6s ease 0.5s both',
-                    paddingTop: '2rem',
-                    borderTop: '1px solid rgba(99,120,255,0.12)',
-                }}>
-                    {[
-                        { label: 'Publications', val: PROFILE.publications || String(PROFILE.stats?.length || '4') },
-                        { label: 'Institution', val: PROFILE.institutionShort },
-                        { label: 'Location', val: PROFILE.office.split(',').slice(-2).join(',').trim() },
-                    ].map(({ label, val }) => (
-                        <div key={label}>
-                            <p style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)', fontFamily: 'var(--font-mono)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.2rem' }}>
-                                {label}
-                            </p>
-                            <p style={{ fontSize: '0.92rem', fontWeight: 600, color: 'var(--color-text-primary)' }}>
-                                {val}
-                            </p>
-                        </div>
-                    ))}
+                    {/* Stats */}
+                    <div className="flex flex-wrap gap-8 mt-12 pt-8 border-t border-white/10 animate-fade-up [animation-delay:0.4s] [animation-fill-mode:both]">
+                        {[
+                            { label: 'Publications', val: PROFILE.publications || '4+' },
+                            { label: 'Institution', val: PROFILE.institutionShort },
+                            { label: 'Field', val: 'STS & Policy' },
+                        ].map(({ label, val }) => (
+                            <div key={label}>
+                                <p className="text-[0.65rem] text-white/35 font-mono uppercase tracking-widest mb-1">{label}</p>
+                                <p className="text-[0.95rem] font-bold text-white">{val}</p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
 
             {/* Scroll cue */}
             <button
                 onClick={scrollToAbout}
-                style={{
-                    position: 'absolute', bottom: '2.5rem', left: '50%',
-                    transform: 'translateX(-50%)',
-                    background: 'none', border: 'none', cursor: 'pointer',
-                    color: 'var(--color-text-muted)',
-                    animation: 'float 3s ease-in-out infinite',
-                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.35rem',
-                }}
+                className="absolute bottom-8 left-1/2 -translate-x-1/2 bg-transparent border-none cursor-pointer text-white/40 hover:text-white/70 transition-colors animate-bounce flex flex-col items-center gap-1.5 z-20"
             >
-                <span style={{ fontSize: '0.7rem', fontFamily: 'var(--font-mono)', letterSpacing: '0.1em' }}>SCROLL</span>
-                <ArrowDown size={16} />
+                <span className="text-[0.65rem] font-mono tracking-widest">SCROLL</span>
+                <ArrowDown size={14} />
             </button>
-
         </section>
     );
 }

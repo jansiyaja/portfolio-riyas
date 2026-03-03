@@ -30,6 +30,8 @@ Prior to joining IIMK, Riyas completed his Master's in Public Policy and Governa
     orcid: null,
     twitter: null,
   },
+  image: '/Photos/_SKS0260.JPG.jpeg',
+  imageAbout: '/Photos/_SKS0259.JPG.jpeg',
 }
 
 export const EDUCATION = [
@@ -161,6 +163,7 @@ Three interventions seem particularly promising. First, compulsory licensing for
     category: 'Policy',
     tags: ['Patents', 'Disability', 'Access', 'Policy'],
     featured: true,
+    image: '/In popular media/Quiz/IMG-20240201-WA0020.jpg'
   },
   {
     id: 'blog-002',
@@ -187,6 +190,7 @@ I came away from Kozhikode thinking that academic conferences could learn someth
     category: 'Reflection',
     tags: ['Kerala', 'Literature Festival', 'Disability', 'Language', 'STS'],
     featured: false,
+    image: '/In popular media/Quiz/IMG-20240201-WA0021.jpg'
   },
   {
     id: 'blog-003',
@@ -213,6 +217,7 @@ What ADIP cannot address is the upstream problem: why are assistive devices expe
     category: 'Research',
     tags: ['India', 'Policy', 'Assistive Technology', 'RPWD Act', 'ADIP'],
     featured: false,
+    image: '/In popular media/Quiz/IMG-20240201-WA0022.jpg'
   },
   {
     id: 'blog-004',
@@ -235,6 +240,7 @@ The assistive technology sector is, among other things, a management phenomenon:
     category: 'Opinion',
     tags: ['Management', 'Disability Studies', 'Research Agenda'],
     featured: false,
+    image: '/In popular media/Quiz/IMG-20250116-WA0004.jpg'
   },
   {
     id: 'blog-005',
@@ -257,6 +263,7 @@ In India, the tradition of people's science movements — organisations like the
     category: 'Reflection',
     tags: ['STS', 'Public Engagement', 'Science Communication'],
     featured: false,
+    image: '/In popular media/Quiz/IMG-20250116-WA0008.jpg'
   },
   {
     id: 'blog-006',
@@ -281,41 +288,41 @@ I see this work as connected to my research, not separate from it. The process o
     category: 'Outreach',
     tags: ['Quiz', 'Disability Awareness', 'Kerala', 'Outreach'],
     featured: false,
+    image: '/In popular media/Quiz/IMG-20260123-WA0074.jpg'
   },
 ]
 
 export const GALLERY = {
   keralaLitFest: [
-    { id: 'klf-1', caption: 'Kerala Literature Festival 2023 — Opening Session', location: 'Beach Stage, Kozhikode', year: 2023, hue: '160' },
-    { id: 'klf-2', caption: 'Panel on Language, Technology & Accessibility', location: 'KLF Venue, Kozhikode', year: 2023, hue: '200' },
-    { id: 'klf-3', caption: 'Sign Language Poetry Session', location: 'KLF Main Stage', year: 2023, hue: '30' },
-    { id: 'klf-4', caption: 'Discussion: Digital Archives of Oral Traditions', location: 'KLF Seminar Hall', year: 2022, hue: '240' },
-    { id: 'klf-5', caption: 'Audience at the Beach Venue at Dusk', location: 'Kozhikode Beach', year: 2022, hue: '210' },
-    { id: 'klf-6', caption: 'Malayalam Literary Voices Panel', location: 'KLF, Kozhikode', year: 2022, hue: '340' },
+    { id: 'klf-1', image: '/In popular media/Quiz/IMG-20230223-WA0051.jpg', caption: 'Kerala Literature Festival 2023 — Opening Session', location: 'Beach Stage, Kozhikode', year: 2023, hue: '160' },
+    { id: 'klf-2', image: '/In popular media/Quiz/IMG-20230223-WA0056.jpg', caption: 'Panel on Language, Technology & Accessibility', location: 'KLF Venue, Kozhikode', year: 2023, hue: '200' },
+    { id: 'klf-3', image: '/In popular media/Quiz/IMG-20230223-WA0087.jpg', caption: 'Sign Language Poetry Session', location: 'KLF Main Stage', year: 2023, hue: '30' },
+    { id: 'klf-4', image: '/In popular media/Quiz/IMG-20240117-WA0057.jpg', caption: 'Discussion: Digital Archives of Oral Traditions', location: 'KLF Seminar Hall', year: 2022, hue: '240' },
+    { id: 'klf-5', image: '/In popular media/Quiz/IMG-20240201-WA0020.jpg', caption: 'Audience at the Beach Venue at Dusk', location: 'Kozhikode Beach', year: 2022, hue: '210' },
+    { id: 'klf-6', image: '/In popular media/Quiz/IMG-20240201-WA0021.jpg', caption: 'Malayalam Literary Voices Panel', location: 'KLF, Kozhikode', year: 2022, hue: '340' },
   ],
   disabilityFestivals: [
-    { id: 'df-1', caption: 'Disability Pride Gathering — Kerala', location: 'Thiruvananthapuram', year: 2023, hue: '25' },
-    { id: 'df-2', caption: 'Inclusive Arts Exhibition', location: 'Kochi', year: 2023, hue: '140' },
-    { id: 'df-3', caption: 'Deaf Culture Festival — Cultural Programme', location: 'Kozhikode', year: 2022, hue: '270' },
-    { id: 'df-4', caption: 'Assistive Technology Demonstration Day', location: 'IIMK Campus', year: 2023, hue: '45' },
-    { id: 'df-5', caption: 'Disability Rights Workshop — Youth Participants', location: 'Thrissur', year: 2022, hue: '170' },
+    { id: 'df-1', image: '/In popular media/Quiz/IMG-20240201-WA0022.jpg', caption: 'Disability Pride Gathering — Kerala', location: 'Thiruvananthapuram', year: 2023, hue: '25' },
+    { id: 'df-2', image: '/In popular media/Quiz/IMG-20250116-WA0004.jpg', caption: 'Inclusive Arts Exhibition', location: 'Kochi', year: 2023, hue: '140' },
+    { id: 'df-3', image: '/In popular media/Quiz/IMG-20250116-WA0008.jpg', caption: 'Deaf Culture Festival — Cultural Programme', location: 'Kozhikode', year: 2022, hue: '270' },
+    { id: 'df-4', image: '/In popular media/Quiz/IMG-20260123-WA0074.jpg', caption: 'Assistive Technology Demonstration Day', location: 'IIMK Campus', year: 2023, hue: '45' },
+    { id: 'df-5', image: '/In popular media/Quiz/Screenshot_20260124_084948_Chrome.jpg', caption: 'Disability Rights Workshop — Youth Participants', location: 'Thrissur', year: 2022, hue: '170' },
   ],
   academicConferences: [
-    { id: 'ac-1', caption: 'Doctoral Colloquium — IIM Kozhikode', location: 'IIMK Campus', year: 2023, hue: '120' },
-    { id: 'ac-2', caption: 'National Conference on Science & Technology Policy', location: 'New Delhi', year: 2022, hue: '300' },
-    { id: 'ac-3', caption: 'Research Presentation — STS Workshop', location: 'Bengaluru', year: 2023, hue: '190' },
-    { id: 'ac-4', caption: 'Interdisciplinary Workshop on Disability & Management', location: 'IIM Ahmedabad', year: 2022, hue: '350' },
-    { id: 'ac-5', caption: 'IPR Policy Roundtable — Academia & Industry', location: 'Mumbai', year: 2023, hue: '85' },
-    { id: 'ac-6', caption: 'Annual Faculty–PhD Symposium, IIMK', location: 'IIMK Campus', year: 2023, hue: '220' },
+    { id: 'ac-1', image: '/Conferences/WhatsApp Image 2026-02-13 at 10.36.14 AM.jpeg', caption: 'Doctoral Colloquium — IIM Kozhikode', location: 'IIMK Campus', year: 2023, hue: '120' },
+    { id: 'ac-2', image: '/Conferences/WhatsApp Image 2026-02-13 at 10.36.15 AM.jpeg', caption: 'National Conference on Science & Technology Policy', location: 'New Delhi', year: 2022, hue: '300' },
+    { id: 'ac-3', image: '/Photos/20240814_103334.jpg', caption: 'Research Presentation — STS Workshop', location: 'Bengaluru', year: 2023, hue: '190' },
+    { id: 'ac-4', image: '/Photos/IMG-20240912-WA0077.jpg', caption: 'Interdisciplinary Workshop on Disability & Management', location: 'IIM Ahmedabad', year: 2022, hue: '350' },
   ],
 }
 
 export const MEDIA_COVERAGE = [
-  { id: 'media-001', title: 'Doctoral Research on Patent Barriers to Assistive Technology Highlighted', publication: 'The Hindu — Education Plus', date: '2023-09-15', type: 'Article', description: 'Coverage of doctoral research examining how intellectual property regimes affect access to assistive devices for persons with disabilities in India.', hue: '220' },
-  { id: 'media-002', title: 'Making Technology Accessible: Interview with IIM-K Researcher', publication: 'Mathrubhumi', date: '2023-04-10', type: 'Interview', description: 'Malayalam language interview discussing assistive technology access, disability rights, and the research agenda at IIM Kozhikode.', hue: '10' },
-  { id: 'media-003', title: 'Disability Rights and the Patent System: A Policy Gap', publication: 'Economic & Political Weekly Blog', date: '2022-11-28', type: 'Op-Ed', description: "Opinion piece arguing for reform of India's patent and procurement framework to improve access to assistive technologies.", hue: '140' },
-  { id: 'media-004', title: 'IIM Kozhikode PhD Scholar on Inclusive Innovation', publication: 'Manorama Online', date: '2023-06-05', type: 'Feature', description: 'Feature on the intersection of management research and disability policy at IIM Kozhikode.', hue: '40' },
-  { id: 'media-005', title: 'Quiz Champion to Policy Researcher: A Kozhikode Story', publication: 'Deccan Chronicle — Kerala Edition', date: '2022-08-19', type: 'Profile', description: 'Profile piece tracing the path from quiz competitions to doctoral research on disability and technology policy.', hue: '190' },
+  { id: 'media-001', title: 'Doctoral Research on Patent Barriers to Assistive Technology Highlighted', publication: 'The Hindu — Education Plus', date: '2023-09-15', type: 'Article', description: 'Coverage of doctoral research examining how intellectual property regimes affect access to assistive devices for persons with disabilities in India.', hue: '220', image: '/Publications/IIM Kozhikode Article - Hindu Business Line _260213_103113.jpg', url: 'https://www.thehindu.com' },
+  { id: 'media-002', title: 'Making Technology Accessible: Interview with IIM-K Researcher', publication: 'Mathrubhumi', date: '2023-04-10', type: 'Interview', description: 'Malayalam language interview discussing assistive technology access, disability rights, and the research agenda at IIM Kozhikode.', hue: '10', url: 'https://www.mathrubhumi.com' },
+  { id: 'media-003', title: 'Disability Rights and the Patent System: A Policy Gap', publication: 'Economic & Political Weekly Blog', date: '2022-11-28', type: 'Op-Ed', description: "Opinion piece arguing for reform of India's patent and procurement framework to improve access to assistive technologies.", hue: '140', url: 'https://www.epw.in' },
+  { id: 'media-004', title: 'IIM Kozhikode PhD Scholar on Inclusive Innovation', publication: 'Manorama Online', date: '2023-06-05', type: 'Feature', description: 'Feature on the intersection of management research and disability policy at IIM Kozhikode.', hue: '40', url: 'https://www.manoramaonline.com' },
+  { id: 'media-005', title: 'Quiz Champion to Policy Researcher: A Kozhikode Story', publication: 'Deccan Chronicle — Kerala Edition', date: '2022-08-19', type: 'Profile', description: 'Profile piece tracing the path from quiz competitions to doctoral research on disability and technology policy.', hue: '190', url: 'https://www.deccanchronicle.com' },
+  { id: 'media-forbes', title: 'Navigating Innovation in South Asia', publication: 'Forbes India', date: 'Jan 2024', type: 'Feature', description: 'A profile on emerging researchers working at the intersection of intellectual property and social equity.', hue: '270', image: '/Publications/riyas_forbes.jpg', url: 'https://www.forbesindia.com' },
   { id: 'media-006', title: "Young Researchers Tackle India's Disability Technology Gap", publication: 'The New Indian Express', date: '2023-01-22', type: 'Article', description: 'Group feature on emerging researchers working at the intersection of disability, technology, and policy.', hue: '270' },
 ]
 
@@ -335,6 +342,7 @@ export const OUTREACH_PROGRAMS = [
     participants: '400+ students, 12 colleges',
     period: '2022–2023',
     icon: 'quiz',
+    image: '/In popular media/Quiz/IMG-20230223-WA0051.jpg',
     highlights: ['Questions designed around RPWD Act 2016 provisions', 'Special rounds on assistive technology and universal design', 'Resource packet on disability rights distributed to all participants'],
   },
   {
@@ -345,6 +353,7 @@ export const OUTREACH_PROGRAMS = [
     participants: 'Undergraduate students, NSS volunteers',
     period: '2023–Present',
     icon: 'workshop',
+    image: '/In popular media/Quiz/IMG-20250116-WA0004.jpg',
     highlights: ['Case study on hearing aid pricing and patent policy', 'Guest speaker: disability rights advocate', 'Hands-on demonstration of screen readers and accessible design'],
   },
   {
@@ -355,6 +364,7 @@ export const OUTREACH_PROGRAMS = [
     participants: 'General public, civil society organisations',
     period: '2022–Present',
     icon: 'lecture',
+    image: '/In popular media/Quiz/IMG-20250116-WA0008.jpg',
     highlights: ['Lecture on "Disability and the History of Technology"', 'Lecture on "Who Designs for Whom? Universal Design in Practice"', 'Lecture on "Patents, Prices and Access: The Hearing Aid Story"'],
   },
   {
@@ -365,6 +375,7 @@ export const OUTREACH_PROGRAMS = [
     participants: 'Disability rights NGOs, policy practitioners',
     period: 'Ongoing',
     icon: 'policy',
+    image: '/In popular media/Quiz/Screenshot_20260124_084948_Chrome.jpg',
     highlights: ['Policy brief: "Reforming ADIP for Better Assistive Technology Access"', 'Input to Kerala State Disability Commission consultation', 'Collaboration with NCPEDP on IPR advocacy'],
   },
 ]

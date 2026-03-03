@@ -20,48 +20,36 @@ export default function Footer() {
     ];
 
     return (
-        <footer style={{
-            background: 'var(--color-bg-secondary)',
-            borderTop: '1px solid var(--color-border)',
-            padding: '3rem 0 2rem',
-        }}>
-            <div className="container">
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-                    gap: '2.5rem',
-                    marginBottom: '2.5rem',
-                }}>
+        <footer className="bg-bg-secondary border-t border-border-dim pt-12 pb-8">
+            <div className="container-custom">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-10">
                     {/* Brand */}
                     <div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', marginBottom: '1rem' }}>
-                            <span style={{
-                                width: 36, height: 36, borderRadius: 10,
-                                background: 'linear-gradient(135deg, #6378FF, #8B5CF6)',
-                                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '1rem',
-                                color: 'white',
-                            }}>{PROFILE.name[0]}</span>
-                            <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.05rem', color: 'var(--color-text-primary)' }}>
+                        <div className="flex items-center gap-2.5 mb-4 group">
+                            <span className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center font-display font-black text-white text-base shadow-lg transition-transform group-hover:scale-110">
+                                {PROFILE.name[0]}
+                            </span>
+                            <span className="font-display font-bold text-[1.05rem] text-text-primary">
                                 {PROFILE.name.split(' ')[0]}<span className="gradient-text"> {PROFILE.name.split(' ').slice(1).join(' ')}</span>
                             </span>
                         </div>
-                        <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.88rem', lineHeight: 1.7, maxWidth: 300 }}>
+                        <p className="text-text-secondary text-sm leading-relaxed max-w-[300px]">
                             {PROFILE.bio.split('.')[0]}. {PROFILE.bio.split('.')[1]}.
                         </p>
                     </div>
 
                     {/* Quick links */}
                     <div>
-                        <h4 style={{ fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--color-text-muted)', marginBottom: '1.25rem', fontFamily: 'var(--font-mono)' }}>Quick Links</h4>
-                        <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+                        <h4 className="text-[0.85rem] font-bold uppercase tracking-widest text-text-muted mb-5 font-mono">Quick Links</h4>
+                        <ul className="list-none p-0 m-0 flex flex-col gap-2.5">
                             {nav.map((l) => (
                                 <li key={l.href}>
-                                    <a href={l.href}
-                                        style={{ color: 'var(--color-text-secondary)', fontSize: '0.9rem', transition: 'all 0.2s ease', textDecoration: 'none' }}
-                                        onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--color-primary-light)'; e.currentTarget.style.transform = 'translateX(4px)'; }}
-                                        onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--color-text-secondary)'; e.currentTarget.style.transform = 'translateX(0)'; }}
-                                    >{l.label}</a>
+                                    <a
+                                        href={l.href}
+                                        className="text-text-secondary text-sm transition-all duration-200 hover:text-primary-light hover:translate-x-1 inline-block"
+                                    >
+                                        {l.label}
+                                    </a>
                                 </li>
                             ))}
                         </ul>
@@ -69,9 +57,9 @@ export default function Footer() {
 
                     {/* Contact */}
                     <div>
-                        <h4 style={{ fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--color-text-muted)', marginBottom: '1.25rem', fontFamily: 'var(--font-mono)' }}>Get in Touch</h4>
-                        <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.9rem', marginBottom: '0.75rem', wordBreak: 'break-all' }}>{PROFILE.email}</p>
-                        <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.88rem', lineHeight: 1.5 }}>
+                        <h4 className="text-[0.85rem] font-bold uppercase tracking-widest text-text-muted mb-5 font-mono">Get in Touch</h4>
+                        <p className="text-text-secondary text-sm mb-3 font-semibold break-all leading-relaxed">{PROFILE.email}</p>
+                        <p className="text-text-secondary text-sm leading-relaxed">
                             {PROFILE.institutionShort}<br />
                             {PROFILE.office.split(',').slice(0, 2).join(',')}
                         </p>
@@ -79,17 +67,12 @@ export default function Footer() {
                 </div>
 
                 {/* Bottom bar */}
-                <div style={{
-                    display: 'flex', flexWrap: 'wrap', gap: '1rem',
-                    alignItems: 'center', justifyContent: 'space-between',
-                    paddingTop: '1.5rem',
-                    borderTop: '1px solid var(--color-border)',
-                }}>
-                    <p style={{ color: 'var(--color-text-muted)', fontSize: '0.82rem' }}>
+                <div className="flex flex-col sm:flex-row gap-4 items-center justify-between pt-6 border-t border-border-dim">
+                    <p className="text-text-muted text-[0.82rem] font-medium order-2 sm:order-1">
                         © {year} {PROFILE.name}. All rights reserved.
                     </p>
 
-                    <div style={{ display: 'flex', gap: '0.65rem' }}>
+                    <div className="flex gap-2.5 order-1 sm:order-2">
                         {socials.map(({ icon: Icon, href, label }) => (
                             <a
                                 key={label}
@@ -97,24 +80,7 @@ export default function Footer() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label={label}
-                                style={{
-                                    width: 36, height: 36,
-                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                    borderRadius: 'var(--radius-sm)',
-                                    border: '1px solid var(--color-border)',
-                                    color: 'var(--color-text-muted)',
-                                    transition: 'all 0.2s ease',
-                                }}
-                                onMouseEnter={(e) => {
-                                    e.currentTarget.style.color = 'var(--color-primary-light)';
-                                    e.currentTarget.style.borderColor = 'rgba(99,120,255,0.4)';
-                                    e.currentTarget.style.background = 'rgba(99,120,255,0.08)';
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.currentTarget.style.color = 'var(--color-text-muted)';
-                                    e.currentTarget.style.borderColor = 'var(--color-border)';
-                                    e.currentTarget.style.background = 'transparent';
-                                }}
+                                className="w-9 h-9 flex items-center justify-center rounded-xl border border-border-dim text-text-muted hover:text-primary-light hover:border-primary/40 hover:bg-primary/10 transition-all"
                             >
                                 <Icon size={16} />
                             </a>
