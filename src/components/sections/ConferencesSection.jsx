@@ -1,12 +1,12 @@
 import { CONFERENCES } from '../../data/portfolio';
 import { Presentation, MapPin, Calendar, Award, Quote } from 'lucide-react';
 
-// Map conference images from the Conferences folder
+// Conference images with optimal crop positions
 const confImages = [
-    '/Conferences/WhatsApp Image 2026-02-13 at 10.36.14 AM.jpeg',
-    '/Conferences/WhatsApp Image 2026-02-13 at 10.36.15 AM.jpeg',
-    '/Photos/20240814_103334.jpg',
-    '/Photos/IMG-20240912-WA0077.jpg',
+    { src: '/Conferences/WhatsApp Image 2026-02-13 at 10.36.14 AM.jpeg', objectPosition: 'top' },
+    { src: '/Conferences/WhatsApp Image 2026-02-13 at 10.36.15 AM.jpeg', objectPosition: 'center' },
+    { src: '/Photos/20240814_103334.jpg', objectPosition: '50% 20%' },
+    { src: '/Photos/IMG-20240912-WA0077.jpg', objectPosition: 'top' },
 ];
 
 export default function ConferencesSection() {
@@ -29,22 +29,24 @@ export default function ConferencesSection() {
                 {/* Grid — Image-forward cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-16">
                     {CONFERENCES.map((conf, idx) => {
-                        const img = confImages[idx] || confImages[0];
+                        const imgData = confImages[idx] || confImages[0];
                         return (
                             <div
                                 key={conf.id}
                                 className="group rounded-2xl overflow-hidden border border-white/8 hover:border-white/20 transition-all duration-300 bg-[#0d1020] flex flex-col"
                             >
-                                {/* Large image */}
-                                <div className="relative h-56 overflow-hidden flex-shrink-0">
+                                {/* Large image — object-cover fills the card, object-top crops from the head */}
+                                <div className="relative h-64 overflow-hidden flex-shrink-0 bg-[#0d1020]">
                                     <img
-                                        src={img}
+                                        src={imgData.src}
                                         alt={conf.title}
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                        style={{ objectPosition: imgData.objectPosition }}
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-[#0d1020] via-black/30 to-transparent" />
+                                    {/* Bottom fade */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-[#0d1020] via-black/20 to-transparent" />
 
-                                    {/* Type badge on image */}
+                                    {/* Type badge */}
                                     <div className="absolute top-4 left-4">
                                         <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold backdrop-blur-md border font-mono
                                             ${conf.type === 'Invited Talk'
@@ -81,21 +83,20 @@ export default function ConferencesSection() {
                     })}
                 </div>
 
-                {/* Quote block */}
-                <div className="relative rounded-2xl overflow-hidden">
-                    {/* Background image from conferences */}
+                {/* Quote block — photo background */}
+                <div className="relative rounded-2xl overflow-hidden border border-white/8">
                     <div className="absolute inset-0">
                         <img
-                            src="/Photos/20240814_103334.jpg"
-                            alt="Conference"
-                            className="w-full h-full object-cover opacity-20"
+                            src="/Conferences/WhatsApp Image 2026-02-13 at 10.36.14 AM.jpeg"
+                            alt="Conference background"
+                            className="w-full h-full object-cover object-top opacity-25"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0d1a] via-[#0a0d1a]/80 to-[#0a0d1a]/60" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0d1a] via-[#0a0d1a]/85 to-[#0a0d1a]/70" />
                     </div>
 
                     <div className="relative z-10 p-10 md:p-16 text-center max-w-3xl mx-auto">
-                        <Quote size={36} className="text-primary/30 mx-auto mb-6" />
-                        <p className="text-lg md:text-xl italic text-white/70 leading-relaxed mb-6">
+                        <Quote size={36} className="text-primary/40 mx-auto mb-6" />
+                        <p className="text-lg md:text-xl italic text-white/75 leading-relaxed mb-6">
                             "The value of academic research is amplified when it engages with broader publics and policymakers. Conferences are not just about presenting data, but about building networks for meaningful policy change."
                         </p>
                         <p className="text-primary-light font-bold tracking-widest font-mono text-sm">— Riyas K K</p>
