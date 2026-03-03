@@ -12,6 +12,8 @@
   padding: 0;
 }
 
+@import "tailwindcss";
+
 :root {
   /* Colors */
   --color-bg: #070B14;
@@ -81,6 +83,9 @@ body {
   background-color: var(--color-bg);
   color: var(--color-text-primary);
   line-height: 1.6;
+  font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -454,4 +459,14 @@ a {
   .section-title {
     font-size: clamp(1.75rem, 6vw, 2.5rem);
   }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background-color: #ffffff;
 }
