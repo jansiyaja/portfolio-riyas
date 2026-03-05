@@ -1,6 +1,7 @@
 import { GALLERY } from '../../data/portfolio';
 import { MapPin, Calendar, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState, useEffect, useCallback } from 'react';
+import AccordionSection from '../ui/AccordionSection';
 
 export default function GallerySection() {
     const [activeTab, setActiveTab] = useState('keralaLitFest');
@@ -32,23 +33,19 @@ export default function GallerySection() {
     }, [lightbox, prev, next]);
 
     return (
-        <section id="gallery" className="bg-section relative overflow-hidden bg-[#070B14] py-20">
-            <div className="container-custom">
-                {/* Header */}
-                <div className="text-center mb-12">
-                    <p className="font-mono text-[0.75rem] font-medium text-primary-light tracking-widest uppercase mb-3">
-                        — Visual Journey —
-                    </p>
-                    <h2 className="text-[clamp(2rem,4vw,3rem)] font-extrabold mb-4 text-white">
-                        Engaging with <span className="gradient-text">Communities</span>
-                    </h2>
-                    <p className="text-white/50 max-w-[560px] mx-auto leading-relaxed text-sm">
-                        Moments from field work, public forums, and academic gatherings.
-                    </p>
-                </div>
-
+        <>
+            <AccordionSection
+                id="gallery"
+                bg="bg-[#070B14]"
+                label="Visual Journey"
+                title={<>Engaging with <span className="gradient-text">Communities</span></>}
+                subtitle="Moments from field work, public forums, and academic gatherings."
+                index={6}
+                accentColor="#F87171"
+                meta={['15+ Photos', 'KLF · Disability · Conferences', '2022–2024']}
+            >
                 {/* Tabs */}
-                <div className="flex justify-center gap-3 mb-10 flex-wrap">
+                <div className="flex justify-center gap-3 mb-10 flex-wrap -mt-2">
                     {tabs.map((tab) => (
                         <button
                             key={tab.id}
@@ -103,9 +100,9 @@ export default function GallerySection() {
                         </div>
                     ))}
                 </div>
-            </div>
+            </AccordionSection>
 
-            {/* Lightbox */}
+            {/* Lightbox — rendered outside the accordion so overflow:hidden doesn't clip it */}
             {lightbox && (
                 <div
                     className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center"
@@ -157,6 +154,6 @@ export default function GallerySection() {
                     </button>
                 </div>
             )}
-        </section>
+        </>
     );
 }
